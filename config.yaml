@@ -1,0 +1,32 @@
+name: envio-bn-booster-s2-indexer
+description: Envio Binance Booster S2 indexer
+#Global contract definitions that must contain all definitions except
+#addresses. Now you can share a single handler/abi/event definitions
+#for contracts across multiple chains
+contracts:
+  - name: StakingRewards
+    abi_file_path: ./abis/staking-rewards-abi.json
+    handler: ./src/StakingRewardsEventHandlers.js
+    events:
+      - event: RewardsClaimed(address indexed user, uint256 amount)
+  - name: NodeStakingVault
+    abi_file_path: ./abis/node-staking-vault-abi.json
+    handler: ./src/NodeStakingVaultEventHandlers.js
+    events:
+      - event: DelegateAmountIncreased(address indexed user, address indexed node, uint256 amount, uint256 newTotalAmount, uint256 effectiveMultiplier)
+      - event: DelegateUnstaked(address indexed user, uint256 amount)
+      - event: DelegateUnstakingInitiated(address indexed user, address indexed node, uint256 amount, uint256 cooldownAmount)
+      - event: Delegated(address indexed user, address indexed node, uint256 amount, uint256 effectiveMultiplier, uint256 effectiveLockUpPeriod)
+rollback_on_reorg: false
+networks:
+  - id: 97 # BSC
+    start_block: 74661607
+    contracts:
+      - name: StakingRewards
+        address: "0x2A8Ff9695DACa6F86D4df9eBF51622D78B44c54c"
+      - name: NodeStakingVault
+        address: "0x1Ec757944369eaF4Ad6d85ca8F917f2e1Db9867d"
+field_selection:
+  transaction_fields:
+    - "hash"
+    - "transactionIndex"
