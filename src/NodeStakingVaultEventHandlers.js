@@ -61,7 +61,7 @@ NodeStakingVault.DelegateUnstakingInitiated.handler(async ({ event, context }) =
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
     user: event.params.user,
     operation: "DelegateUnstakingInitiated",
-    amount: event.params.amount,
+    amount: event.params.cooldownAmount,
     blockTimestamp: event.block.timestamp,
     transactionHash: event.transaction.hash
   };
