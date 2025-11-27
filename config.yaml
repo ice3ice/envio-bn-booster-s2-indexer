@@ -19,13 +19,13 @@ contracts:
       - event: Delegated(address indexed user, address indexed node, uint256 amount, uint256 effectiveMultiplier, uint256 effectiveLockUpPeriod)
 rollback_on_reorg: false
 networks:
-  - id: 97 # BSC
-    start_block: 75239737
+  - id: 56 # BSC
+    start_block: 69706085
     contracts:
       - name: StakingRewards
-        address: "0x951d9642a5641E453667BF8ee5cB17D8fbC3D143"
+        address: "0xbC0dfeA910886A539F3a5C0703112F53F465A1B0"
       - name: NodeStakingVault
-        address: "0x12A2A133731fe75BbE279119d126Ec462Dce316F"
+        address: "0xEf82BA1938851D430185DF448899996912b99a6f"
 field_selection:
   transaction_fields:
     - "hash"
