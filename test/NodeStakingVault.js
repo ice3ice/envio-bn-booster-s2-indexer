@@ -89,12 +89,9 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
       transactionHash: eventMock.transaction.hash
     });
 
-    // Note: Based on current utils.js implementation, level 2 check comes after level 1
-    // So level 2 amount will still result in level 1 due to the bug in getUserLevel
-    // Testing based on current implementation
     assert.deepEqual(userLevel, {
       id: level2User,
-      level: 1, // Current implementation bug: checks level1 first, so level2 threshold never reached
+      level: 2,
       blockTimestamp: eventMock.block.timestamp
     });
   });
@@ -263,6 +260,62 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
       id: existingUser,
       level: 1,
       blockTimestamp: originalTimestamp // Should keep original timestamp
+    });
+  });
+
+  it("NodeStakingVault DelegateAmountIncreased - upgrades UserLevel when threshold crossed", async () => {
+    const upgradingUser = "0x5555555555555555555555555555555555555555";
+
+    // Start at level 1
+    const initialParams = {
+      user: upgradingUser,
+      node: testNode,
+      amount: 300000000000000000000n, // 300 tokens - level 1
+      effectiveMultiplier: 1000000n,
+      effectiveLockUpPeriod: 2592000n,
+      mockEventData: {
+        chainId,
+        block: { number: blockNumber + 5, timestamp: 1000010 },
+        logIndex: 0,
+        transaction: { hash: "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef12345678aa" }
+      }
+    };
+
+    const initialEventMock = NodeStakingVault.Delegated.createMockEvent(initialParams);
+
+    mockDb = await NodeStakingVault.Delegated.processEvent({
+      event: initialEventMock,
+      mockDb
+    });
+
+    // Increase to reach level 2
+    const upgradeParams = {
+      user: upgradingUser,
+      node: testNode,
+      amount: 1700000000000000000000n, // push total over level 2 threshold
+      newTotalAmount: 2000000000000000000000n, // 2000 tokens total - level 2
+      effectiveMultiplier: 1000000n,
+      mockEventData: {
+        chainId,
+        block: { number: blockNumber + 6, timestamp: 1000011 },
+        logIndex: 0,
+        transaction: { hash: "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef12345678ab" }
+      }
+    };
+
+    const upgradeEventMock = NodeStakingVault.DelegateAmountIncreased.createMockEvent(upgradeParams);
+
+    mockDb = await NodeStakingVault.DelegateAmountIncreased.processEvent({
+      event: upgradeEventMock,
+      mockDb
+    });
+
+    const userLevel = await mockDb.entities.UserLevel.get(upgradingUser);
+
+    assert.deepEqual(userLevel, {
+      id: upgradingUser,
+      level: 2,
+      blockTimestamp: upgradeEventMock.block.timestamp
     });
   });
 

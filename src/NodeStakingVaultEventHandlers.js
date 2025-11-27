@@ -1,7 +1,7 @@
 /*
  * Please refer to https://docs.envio.dev for a thorough guide on all Envio indexer features
  */
-const { NodeStakingVault, StakingRewards } = require("../generated");
+const { NodeStakingVault } = require("../generated");
 const { getUserLevel } = require("./utils");
 
 NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
@@ -21,6 +21,8 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
   context.UserHistory.set(userHistory);
 
   const level = getUserLevel(event.params.newTotalAmount);
+
+  // console.log("level", level);
 
   if(level > 0) {
     let userLevel = await context.UserLevel.get(event.params.user);

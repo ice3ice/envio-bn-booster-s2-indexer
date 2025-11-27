@@ -10,7 +10,7 @@ const getUserLevel = (amount) => {
     level = 2;
   } else if(amount >= LevelDefinitions.level1Amount) {
     level = 1;
-  } 
+  }
 
   return level;
 }
