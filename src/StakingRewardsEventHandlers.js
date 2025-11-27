@@ -13,7 +13,7 @@ StakingRewards.RewardsClaimed.handler(async ({ event, context }) => {
     transactionHash: event.transaction.hash
   };
 
-  console.log("UserHistoryItem from RewardsClaimeds", UserHistoryItem);
+  // console.log("UserHistoryItem from RewardsClaimeds", UserHistoryItem);
 
   context.UserHistory.set(UserHistoryItem);
 });

@@ -5,7 +5,7 @@ const { NodeStakingVault, StakingRewards } = require("../generated");
 const { getUserLevel } = require("./utils");
 
 NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
-  console.log("event.transaction.hash", event.transaction);
+  // console.log("event.transaction.hash", event.transaction);
 
   const userHistory = {
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
@@ -16,7 +16,7 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
     transactionHash: event.transaction.hash
   };
 
-  console.log("UserHistory from DelegateAmountIncreaseds", userHistory);
+  // console.log("UserHistory from DelegateAmountIncreaseds", userHistory);
 
   context.UserHistory.set(userHistory);
 
@@ -51,7 +51,7 @@ NodeStakingVault.DelegateUnstaked.handler(async ({ event, context }) => {
     transactionHash: event.transaction.hash
   };
 
-  console.log("UserHistory from DelegateUnstakeds", userHistory);
+  // console.log("UserHistory from DelegateUnstakeds", userHistory);
 
   context.UserHistory.set(userHistory);
 });
@@ -66,7 +66,7 @@ NodeStakingVault.DelegateUnstakingInitiated.handler(async ({ event, context }) =
     transactionHash: event.transaction.hash
   };
 
-  console.log("UserHistory from DelegateUnstakingInitiateds", userHistory);
+  // console.log("UserHistory from DelegateUnstakingInitiateds", userHistory);
 
   context.UserHistory.set(userHistory);
 });
@@ -81,7 +81,7 @@ NodeStakingVault.Delegated.handler(async ({ event, context }) => {
     transactionHash: event.transaction.hash
   };
 
-  console.log("UserHistory from Delegateds", userHistory);
+  // console.log("UserHistory from Delegateds", userHistory);
 
   context.UserHistory.set(userHistory);
 
