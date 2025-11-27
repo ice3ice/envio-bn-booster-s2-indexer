@@ -6,10 +6,10 @@ const LevelDefinitions = {
 const getUserLevel = (amount) => {
   let level = 0;
 
-  if(amount >= LevelDefinitions.level1Amount) {
-    level = 1;
-  } else if(amount >= LevelDefinitions.level2Amount) {
+  if(amount >= LevelDefinitions.level2Amount) {
     level = 2;
+  } else if(amount >= LevelDefinitions.level1Amount) {
+    level = 1;
   } 
 
   return level;
