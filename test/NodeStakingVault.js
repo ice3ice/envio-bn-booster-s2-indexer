@@ -7,7 +7,7 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
 
   const testUser = "0x73822216A80E4FF2dCB1477287c17e1c523F165a";
   const testNode = "0x1234567890123456789012345678901234567890";
-  const chainId = 97;
+  const chainId = 56;
   const blockNumber = 1000;
   const logIndex = 0;
 
@@ -49,7 +49,8 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userLevel, {
       id: testUser,
       level: 1,
-      blockTimestamp: eventMock.block.timestamp
+      blockTimestamp: eventMock.block.timestamp,
+      transactionHash: eventMock.transaction.hash
     });
   });
 
@@ -92,7 +93,8 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userLevel, {
       id: level2User,
       level: 2,
-      blockTimestamp: eventMock.block.timestamp
+      blockTimestamp: eventMock.block.timestamp,
+      transactionHash: eventMock.transaction.hash
     });
   });
 
@@ -199,7 +201,8 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userLevel, {
       id: newUser,
       level: 1,
-      blockTimestamp: eventMock.block.timestamp
+      blockTimestamp: eventMock.block.timestamp,
+      transactionHash: eventMock.transaction.hash
     });
   });
 
@@ -230,6 +233,7 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
 
     const originalUserLevel = await mockDb.entities.UserLevel.get(existingUser);
     const originalTimestamp = originalUserLevel.blockTimestamp;
+    const originalTransactionHash = originalUserLevel.transactionHash;
 
     // Then try to increase but still level 1 (should not update)
     const params = {
@@ -259,7 +263,8 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userLevel, {
       id: existingUser,
       level: 1,
-      blockTimestamp: originalTimestamp // Should keep original timestamp
+      blockTimestamp: originalTimestamp, // Should keep original timestamp
+      transactionHash: originalTransactionHash // Should keep original transaction hash
     });
   });
 
@@ -315,7 +320,8 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userLevel, {
       id: upgradingUser,
       level: 2,
-      blockTimestamp: upgradeEventMock.block.timestamp
+      blockTimestamp: upgradeEventMock.block.timestamp,
+      transactionHash: upgradeEventMock.transaction.hash
     });
   });
 
@@ -379,7 +385,7 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
       id: historyId,
       user: testUser,
       operation: "DelegateUnstakingInitiated",
-      amount: params.amount,
+      amount: params.cooldownAmount,
       blockTimestamp: eventMock.block.timestamp,
       transactionHash: eventMock.transaction.hash
     });

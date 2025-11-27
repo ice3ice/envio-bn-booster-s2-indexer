@@ -6,7 +6,7 @@ describe("StakingRewards contract event tests", () => {
   let mockDb = MockDb.createMockDb();
 
   const testUser = "0x73822216A80E4FF2dCB1477287c17e1c523F165a";
-  const chainId = 97;
+  const chainId = 56;
   const blockNumber = 1000;
   const logIndex = 0;
 
