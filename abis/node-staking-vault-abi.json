@@ -19,6 +19,19 @@
   },
   {
     "type": "function",
+    "name": "avnManager",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IAVNManager"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "calculateMultiplier",
     "inputs": [
       {
@@ -57,19 +70,6 @@
       },
       {
         "name": "lockUpPeriod",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "earlyUnstake",
-    "inputs": [
-      {
-        "name": "amount",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -216,19 +216,9 @@
             "internalType": "uint64"
           },
           {
-            "name": "earlyUnstakeCooldownStart",
-            "type": "uint64",
-            "internalType": "uint64"
-          },
-          {
             "name": "effectiveMultiplier",
             "type": "uint32",
             "internalType": "uint32"
-          },
-          {
-            "name": "earlyUnstakeCooldownAmount",
-            "type": "uint256",
-            "internalType": "uint256"
           }
         ]
       }
@@ -303,16 +293,6 @@
           },
           {
             "name": "totalInCooldown",
-            "type": "uint256",
-            "internalType": "uint256"
-          },
-          {
-            "name": "timeUntilEarlyUnstake",
-            "type": "uint256",
-            "internalType": "uint256"
-          },
-          {
-            "name": "totalInEarlyCooldown",
             "type": "uint256",
             "internalType": "uint256"
           }
@@ -455,32 +435,6 @@
   },
   {
     "type": "function",
-    "name": "initiateEarlyDelegateUnstake",
-    "inputs": [
-      {
-        "name": "amount",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "maximumUserDelegateAmount",
-    "inputs": [],
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ],
-    "stateMutability": "view"
-  },
-  {
-    "type": "function",
     "name": "pause",
     "inputs": [],
     "outputs": [],
@@ -550,12 +504,12 @@
   },
   {
     "type": "function",
-    "name": "setMaximumDelegateAmount",
+    "name": "setAVNManager",
     "inputs": [
       {
-        "name": "newMaximumDelegateAmount",
-        "type": "uint256",
-        "internalType": "uint256"
+        "name": "avnManagerAddress",
+        "type": "address",
+        "internalType": "address"
       }
     ],
     "outputs": [],
@@ -737,19 +691,9 @@
         "internalType": "uint64"
       },
       {
-        "name": "earlyUnstakeCooldownStart",
-        "type": "uint64",
-        "internalType": "uint64"
-      },
-      {
         "name": "effectiveMultiplier",
         "type": "uint32",
         "internalType": "uint32"
-      },
-      {
-        "name": "earlyUnstakeCooldownAmount",
-        "type": "uint256",
-        "internalType": "uint256"
       }
     ],
     "stateMutability": "view"
@@ -782,6 +726,19 @@
   },
   {
     "type": "event",
+    "name": "AVNManagerSet",
+    "inputs": [
+      {
+        "name": "avnManager",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "DelegateAmountIncreased",
     "inputs": [
       {
@@ -810,56 +767,6 @@
       },
       {
         "name": "effectiveMultiplier",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
-      }
-    ],
-    "anonymous": false
-  },
-  {
-    "type": "event",
-    "name": "DelegateEarlyUnstake",
-    "inputs": [
-      {
-        "name": "user",
-        "type": "address",
-        "indexed": true,
-        "internalType": "address"
-      },
-      {
-        "name": "payout",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
-      },
-      {
-        "name": "penalty",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
-      }
-    ],
-    "anonymous": false
-  },
-  {
-    "type": "event",
-    "name": "DelegateEarlyUnstakeInitiated",
-    "inputs": [
-      {
-        "name": "user",
-        "type": "address",
-        "indexed": true,
-        "internalType": "address"
-      },
-      {
-        "name": "cooldownStart",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
-      },
-      {
-        "name": "amount",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"
@@ -951,19 +858,9 @@
             "internalType": "uint64"
           },
           {
-            "name": "earlyUnstakeCooldownStart",
-            "type": "uint64",
-            "internalType": "uint64"
-          },
-          {
             "name": "effectiveMultiplier",
             "type": "uint32",
             "internalType": "uint32"
-          },
-          {
-            "name": "earlyUnstakeCooldownAmount",
-            "type": "uint256",
-            "internalType": "uint256"
           }
         ]
       }
@@ -1006,7 +903,7 @@
         "internalType": "address"
       },
       {
-        "name": "amount",
+        "name": "cooldownStart",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"
@@ -1091,25 +988,6 @@
         "type": "uint64",
         "indexed": false,
         "internalType": "uint64"
-      }
-    ],
-    "anonymous": false
-  },
-  {
-    "type": "event",
-    "name": "MaximumStakeAmountUpdated",
-    "inputs": [
-      {
-        "name": "oldMaximumStakeAmount",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
-      },
-      {
-        "name": "newMaximumStakeAmount",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
       }
     ],
     "anonymous": false

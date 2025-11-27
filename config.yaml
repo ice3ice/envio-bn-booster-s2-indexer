@@ -20,12 +20,12 @@ contracts:
 rollback_on_reorg: false
 networks:
   - id: 97 # BSC
-    start_block: 75162899
+    start_block: 75239737
     contracts:
       - name: StakingRewards
-        address: "0xca9c37E0362Fb76a0f349f67D1F0A69F3E0873E7"
+        address: "0x951d9642a5641E453667BF8ee5cB17D8fbC3D143"
       - name: NodeStakingVault
-        address: "0x2b166C53eDCB251E8D5763b381dD8d184368257D"
+        address: "0x12A2A133731fe75BbE279119d126Ec462Dce316F"
 field_selection:
   transaction_fields:
     - "hash"

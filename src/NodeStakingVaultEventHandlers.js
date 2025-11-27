@@ -31,13 +31,15 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
       userLevel = {
         id: event.params.user,
         level,
-        blockTimestamp: event.block.timestamp
+        blockTimestamp: event.block.timestamp,
+        transactionHash: event.transaction.hash
       };
 
       context.UserLevel.set(userLevel);
     } else if(userLevel.level < level) {
       userLevel.level = level;
       userLevel.blockTimestamp = event.block.timestamp;
+      userLevel.transactionHash = event.transaction.hash;
       context.UserLevel.set(userLevel);
     }
   }
@@ -96,13 +98,15 @@ NodeStakingVault.Delegated.handler(async ({ event, context }) => {
       userLevel = {
         id: event.params.user,
         level,
-        blockTimestamp: event.block.timestamp
+        blockTimestamp: event.block.timestamp,
+        transactionHash: event.transaction.hash
       };
 
       context.UserLevel.set(userLevel);
     } else if(userLevel.level < level) {
       userLevel.level = level;
       userLevel.blockTimestamp = event.block.timestamp;
+      userLevel.transactionHash = event.transaction.hash;
       context.UserLevel.set(userLevel);
     }
   }

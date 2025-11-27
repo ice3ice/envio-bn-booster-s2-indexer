@@ -11,4 +11,5 @@ type UserLevel {
   id: String! # address
   level: Int! # 1, 2
   blockTimestamp: Int!
+  transactionHash: String!
 }
