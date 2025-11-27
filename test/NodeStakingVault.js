@@ -264,7 +264,7 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
   });
 
   it("NodeStakingVault DelegateAmountIncreased - upgrades UserLevel when threshold crossed", async () => {
-    const upgradingUser = "0x5555555555555555555555555555555555555555";
+    const upgradingUser = "0x5555555555555555555555555555555555555556";
 
     // Start at level 1
     const initialParams = {
