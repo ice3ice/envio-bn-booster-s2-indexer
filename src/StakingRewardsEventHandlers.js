@@ -7,7 +7,7 @@ StakingRewards.RewardsClaimed.handler(async ({ event, context }) => {
   const UserHistoryItem = {
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
     user: event.params.user,
-    operation: "RewardsClaimed",
+    operation: "Claim Rewards",
     amount: event.params.amount,
     blockTimestamp: event.block.timestamp,
     transactionHash: event.transaction.hash

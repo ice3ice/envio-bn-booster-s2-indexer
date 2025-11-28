@@ -35,7 +35,7 @@ describe("StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory, {
       id: historyId,
       user: testUser,
-      operation: "RewardsClaimed",
+      operation: "Claim Rewards",
       amount: params.amount,
       blockTimestamp: eventMock.block.timestamp,
       transactionHash: eventMock.transaction.hash
@@ -67,7 +67,7 @@ describe("StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory1, {
       id: historyId1,
       user: testUser,
-      operation: "RewardsClaimed",
+      operation: "Claim Rewards",
       amount: params1.amount,
       blockTimestamp: eventMock1.block.timestamp,
       transactionHash: eventMock1.transaction.hash
@@ -98,7 +98,7 @@ describe("StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory2, {
       id: historyId2,
       user: testUser,
-      operation: "RewardsClaimed",
+      operation: "Claim Rewards",
       amount: params2.amount,
       blockTimestamp: eventMock2.block.timestamp,
       transactionHash: eventMock2.transaction.hash
@@ -138,7 +138,7 @@ describe("StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory1, {
       id: historyId1,
       user: user1,
-      operation: "RewardsClaimed",
+      operation: "Claim Rewards",
       amount: params1.amount,
       blockTimestamp: eventMock1.block.timestamp,
       transactionHash: eventMock1.transaction.hash
@@ -168,7 +168,7 @@ describe("StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory2, {
       id: historyId2,
       user: user2,
-      operation: "RewardsClaimed",
+      operation: "Claim Rewards",
       amount: params2.amount,
       blockTimestamp: eventMock2.block.timestamp,
       transactionHash: eventMock2.transaction.hash
@@ -203,7 +203,7 @@ describe("StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory, {
       id: historyId,
       user: testUser,
-      operation: "RewardsClaimed",
+      operation: "Claim Rewards",
       amount: 0n,
       blockTimestamp: eventMock.block.timestamp,
       transactionHash: eventMock.transaction.hash
@@ -235,7 +235,7 @@ describe("StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory, {
       id: historyId,
       user: testUser,
-      operation: "RewardsClaimed",
+      operation: "Claim Rewards",
       amount: params.amount,
       blockTimestamp: eventMock.block.timestamp,
       transactionHash: eventMock.transaction.hash

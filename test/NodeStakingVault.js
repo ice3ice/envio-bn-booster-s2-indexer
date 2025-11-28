@@ -40,7 +40,7 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory, {
       id: historyId,
       user: testUser,
-      operation: "Delegated",
+      operation: "Delegate",
       amount: params.amount,
       blockTimestamp: eventMock.block.timestamp,
       transactionHash: eventMock.transaction.hash
@@ -84,7 +84,7 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory, {
       id: historyId,
       user: level2User,
-      operation: "Delegated",
+      operation: "Delegate",
       amount: params.amount,
       blockTimestamp: eventMock.block.timestamp,
       transactionHash: eventMock.transaction.hash
@@ -128,7 +128,7 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory, {
       id: historyId,
       user: newUser,
-      operation: "Delegated",
+      operation: "Delegate",
       amount: params.amount,
       blockTimestamp: eventMock.block.timestamp,
       transactionHash: eventMock.transaction.hash
@@ -191,7 +191,7 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory, {
       id: historyId,
       user: newUser,
-      operation: "DelegateAmountIncreased",
+      operation: "Delegate More",
       amount: params.amount,
       blockTimestamp: eventMock.block.timestamp,
       transactionHash: eventMock.transaction.hash
@@ -350,7 +350,7 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory, {
       id: historyId,
       user: testUser,
-      operation: "DelegateUnstaked",
+      operation: "Unstake Complete",
       amount: params.amount,
       blockTimestamp: eventMock.block.timestamp,
       transactionHash: eventMock.transaction.hash
@@ -384,7 +384,7 @@ describe("NodeStakingVault and StakingRewards contract event tests", () => {
     assert.deepEqual(userHistory, {
       id: historyId,
       user: testUser,
-      operation: "DelegateUnstakingInitiated",
+      operation: "Unstake Request",
       amount: params.cooldownAmount,
       blockTimestamp: eventMock.block.timestamp,
       transactionHash: eventMock.transaction.hash

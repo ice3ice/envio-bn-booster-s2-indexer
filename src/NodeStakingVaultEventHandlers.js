@@ -10,7 +10,7 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
   const userHistory = {
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
     user: event.params.user,
-    operation: "DelegateAmountIncreased",
+    operation: "Delegate More",
     amount: event.params.amount,
     blockTimestamp: event.block.timestamp,
     transactionHash: event.transaction.hash
@@ -49,7 +49,7 @@ NodeStakingVault.DelegateUnstaked.handler(async ({ event, context }) => {
   const userHistory = {
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
     user: event.params.user,
-    operation: "DelegateUnstaked",
+    operation: "Unstake Complete",
     amount: event.params.amount,
     blockTimestamp: event.block.timestamp,
     transactionHash: event.transaction.hash
@@ -64,7 +64,7 @@ NodeStakingVault.DelegateUnstakingInitiated.handler(async ({ event, context }) =
   const userHistory = {
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
     user: event.params.user,
-    operation: "DelegateUnstakingInitiated",
+    operation: "Unstake Request",
     amount: event.params.cooldownAmount,
     blockTimestamp: event.block.timestamp,
     transactionHash: event.transaction.hash
@@ -79,7 +79,7 @@ NodeStakingVault.Delegated.handler(async ({ event, context }) => {
   const userHistory = {
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
     user: event.params.user,
-    operation: "Delegated",
+    operation: "Delegate",
     amount: event.params.amount,
     blockTimestamp: event.block.timestamp,
     transactionHash: event.transaction.hash
