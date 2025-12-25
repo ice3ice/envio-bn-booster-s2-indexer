@@ -9,6 +9,8 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
 
   const amount = Number(BigInt(event.params.amount) / BigInt(10**18));
 
+  console.log("amount", amount);
+
   if(amount !== 600) {
     return;
   }
@@ -82,7 +84,10 @@ NodeStakingVault.Delegated.handler(async ({ event, context }) => {
   const amount = Number(BigInt(event.params.amount) / BigInt(10**18));
   const effectiveLockUpPeriod = Number(event.params.effectiveLockUpPeriod);
 
-  if ((amount !== 200 && amount !== 800) || effectiveLockUpPeriod !== 7) {
+  console.log("amount", amount);
+  console.log("effectiveLockUpPeriod", effectiveLockUpPeriod);
+
+  if ((amount !== 200 && amount !== 800) || effectiveLockUpPeriod !== 10 * 60) {
     return;
   }
 
@@ -128,7 +133,7 @@ NodeStakingVault.Delegated.handler(async ({ event, context }) => {
 NodeStakingVault.DelegateLockupIncreased.handler(async ({ event, context }) => {
   const effectiveLockUpPeriod = Number(event.params.lockupPeriod);
 
-  if(effectiveLockUpPeriod !== 7) {
+  if(effectiveLockUpPeriod !== 10 * 60) {
     return;
   }
 
