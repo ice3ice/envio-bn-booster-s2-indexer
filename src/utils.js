@@ -44,6 +44,10 @@ const getTaskCompleted = (timestamp) => {
   }
 }
 
+const test = () => {
+  return 1;
+}
+
 module.exports = {
   getTaskCompleted,
 };
