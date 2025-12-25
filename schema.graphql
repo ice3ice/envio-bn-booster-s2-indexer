@@ -7,3 +7,12 @@ type UserHistory {
   blockTimestamp: Int!
   transactionHash: String!
 }
+
+type UserTaskCompleted {
+  id: String!
+  task1Completed: Boolean!
+  task2Completed: Boolean!
+  task3Completed: Boolean!
+  task4Completed: Boolean!
+  task5Completed: Boolean!
+}
