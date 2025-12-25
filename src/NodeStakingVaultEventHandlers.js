@@ -12,6 +12,7 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
     user: event.params.user,
     operation: "Delegate More",
     amount: event.params.amount,
+    period: 0,
     blockTimestamp: event.block.timestamp,
     transactionHash: event.transaction.hash
   };
@@ -19,30 +20,6 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
   // console.log("UserHistory from DelegateAmountIncreaseds", userHistory);
 
   context.UserHistory.set(userHistory);
-
-  const level = getUserLevel(event.params.newTotalAmount);
-
-  // console.log("level", level);
-
-  if(level > 0) {
-    let userLevel = await context.UserLevel.get(event.params.user);
-
-    if(!userLevel) {
-      userLevel = {
-        id: event.params.user,
-        level,
-        blockTimestamp: event.block.timestamp,
-        transactionHash: event.transaction.hash
-      };
-
-      context.UserLevel.set(userLevel);
-    } else if(userLevel.level < level) {
-      userLevel.level = level;
-      userLevel.blockTimestamp = event.block.timestamp;
-      userLevel.transactionHash = event.transaction.hash;
-      context.UserLevel.set(userLevel);
-    }
-  }
 });
 
 NodeStakingVault.DelegateUnstaked.handler(async ({ event, context }) => {
@@ -51,6 +28,7 @@ NodeStakingVault.DelegateUnstaked.handler(async ({ event, context }) => {
     user: event.params.user,
     operation: "Unstake Complete",
     amount: event.params.amount,
+    period: 0,
     blockTimestamp: event.block.timestamp,
     transactionHash: event.transaction.hash
   };
@@ -66,6 +44,7 @@ NodeStakingVault.DelegateUnstakingInitiated.handler(async ({ event, context }) =
     user: event.params.user,
     operation: "Unstake Request",
     amount: event.params.cooldownAmount,
+    period: 0,
     blockTimestamp: event.block.timestamp,
     transactionHash: event.transaction.hash
   };
@@ -81,6 +60,7 @@ NodeStakingVault.Delegated.handler(async ({ event, context }) => {
     user: event.params.user,
     operation: "Delegate",
     amount: event.params.amount,
+    period: event.params.effectiveLockUpPeriod,
     blockTimestamp: event.block.timestamp,
     transactionHash: event.transaction.hash
   };
@@ -88,26 +68,20 @@ NodeStakingVault.Delegated.handler(async ({ event, context }) => {
   // console.log("UserHistory from Delegateds", userHistory);
 
   context.UserHistory.set(userHistory);
+});
 
-  const level = getUserLevel(event.params.amount);
+NodeStakingVault.DelegateLockupIncreased.handler(async ({ event, context }) => {
+  const userHistory = {
+    id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
+    user: event.params.user,
+    operation: "Delegate Lockup Increased",
+    amount: 0,
+    period: event.params.lockupPeriod,
+    blockTimestamp: event.block.timestamp,
+    transactionHash: event.transaction.hash
+  };
 
-  if(level > 0) {
-    let userLevel = await context.UserLevel.get(event.params.user);
+  // console.log("UserHistory from DelegateLockupIncreaseds", userHistory);
 
-    if(!userLevel) {
-      userLevel = {
-        id: event.params.user,
-        level,
-        blockTimestamp: event.block.timestamp,
-        transactionHash: event.transaction.hash
-      };
-
-      context.UserLevel.set(userLevel);
-    } else if(userLevel.level < level) {
-      userLevel.level = level;
-      userLevel.blockTimestamp = event.block.timestamp;
-      userLevel.transactionHash = event.transaction.hash;
-      context.UserLevel.set(userLevel);
-    }
-  }
+  context.UserHistory.set(userHistory);
 });

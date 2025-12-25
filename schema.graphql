@@ -1,15 +1,9 @@
 type UserHistory {
   id: ID!
   user: String! # (address)
-  operation: String! # Delegated, DelegateAmountIncreased, DelegateUnstakingInitiated, DelegateUnstaked, RewardsClaimed
+  operation: String! # Delegated, DelegateAmountIncreased, DelegateUnstakingInitiated, DelegateUnstaked, DelegateLockupIncreased
   amount: BigInt!
-  blockTimestamp: Int!
-  transactionHash: String!
-}
-
-type UserLevel {
-  id: String! # address
-  level: Int! # 1, 2
+  period: BigInt!
   blockTimestamp: Int!
   transactionHash: String!
 }
