@@ -13,6 +13,8 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
     return;
   }
 
+  const newTotalAmount = Number(BigInt(event.params.newTotalAmount) / BigInt(10**18));
+
   const userHistory = {
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
     user: event.params.user,
@@ -39,7 +41,7 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
     }
   }
 
-  if(amount >= 800) {
+  if(newTotalAmount >= 800) {
     userTaskCompleted.task5Completed = true;
   }
 
@@ -128,6 +130,8 @@ NodeStakingVault.DelegateLockupIncreased.handler(async ({ event, context }) => {
     return;
   }
 
+  const amount = Number(BigInt(event.params.amount) / BigInt(10**18));
+
   const userHistory = {
     id: `${event.chainId}_${event.block.number}_${event.logIndex}`,
     user: event.params.user,
@@ -154,7 +158,9 @@ NodeStakingVault.DelegateLockupIncreased.handler(async ({ event, context }) => {
     }
   }
 
-  userTaskCompleted = getTaskCompleted(event.block.timestamp, userTaskCompleted);
-  
+  if(amount >= 200) {
+    userTaskCompleted = getTaskCompleted(event.block.timestamp, userTaskCompleted);
+  }
+
   context.UserTaskCompleted.set(userTaskCompleted);
 });
