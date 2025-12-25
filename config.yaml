@@ -8,11 +8,11 @@ contracts:
     abi_file_path: ./abis/node-staking-vault-abi.json
     handler: ./src/NodeStakingVaultEventHandlers.js
     events:
-      - event: DelegateAmountIncreased(address indexed user, address indexed node, uint256 amount, uint256 newTotalAmount, uint256 effectiveMultiplier)
+      - event: DelegateAmountIncreased(address indexed user, address indexed node, uint256 amount, uint256 newTotalAmount, uint256 weightedStartTime, uint256 effectiveLockUpPeriod, uint256 effectiveMultiplier)
       - event: DelegateUnstaked(address indexed user, uint256 amount)
       - event: DelegateUnstakingInitiated(address indexed user, address indexed node, uint256 amount, uint256 cooldownAmount)
       - event: Delegated(address indexed user, address indexed node, uint256 amount, uint256 effectiveMultiplier, uint256 effectiveLockUpPeriod)
-      - event: DelegateLockupIncreased(address indexed user, address indexed node, uint256 lockupPeriod, uint256 newEffectiveLockup, uint256 effectiveMultiplier)
+      - event: DelegateLockupIncreased(address indexed user, address indexed node, uint256 lockupPeriod, uint256 amount, uint256 weightedStartTime, uint256 newEffectiveLockup, uint256 effectiveMultiplier)
 rollback_on_reorg: false
 networks:
   - id: 97 # BSC
