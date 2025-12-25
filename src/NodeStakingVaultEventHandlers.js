@@ -9,8 +9,6 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
 
   const amount = Number(BigInt(event.params.amount) / BigInt(10**18));
 
-  console.log("amount", amount);
-
   if(amount !== 600) {
     return;
   }
@@ -41,7 +39,7 @@ NodeStakingVault.DelegateAmountIncreased.handler(async ({ event, context }) => {
     }
   }
 
-  if(amount === 800) {
+  if(amount >= 800) {
     userTaskCompleted.task5Completed = true;
   }
 
@@ -84,9 +82,6 @@ NodeStakingVault.Delegated.handler(async ({ event, context }) => {
   const amount = Number(BigInt(event.params.amount) / BigInt(10**18));
   const effectiveLockUpPeriod = Number(event.params.effectiveLockUpPeriod);
 
-  console.log("amount", amount);
-  console.log("effectiveLockUpPeriod", effectiveLockUpPeriod);
-
   if ((amount !== 200 && amount !== 800) || effectiveLockUpPeriod !== 10 * 60) {
     return;
   }
@@ -117,15 +112,11 @@ NodeStakingVault.Delegated.handler(async ({ event, context }) => {
     }
   }
 
-  if(amount === 800) {
+  if(amount >= 800) {
     userTaskCompleted.task5Completed = true;
   }
 
-  const taskCompleted = getTaskCompleted(event.block.timestamp);
-  userTaskCompleted.task1Completed = taskCompleted.task1Completed;
-  userTaskCompleted.task2Completed = taskCompleted.task2Completed;
-  userTaskCompleted.task3Completed = taskCompleted.task3Completed;
-  userTaskCompleted.task4Completed = taskCompleted.task4Completed;
+  userTaskCompleted = getTaskCompleted(event.block.timestamp, userTaskCompleted);
 
   context.UserTaskCompleted.set(userTaskCompleted);
 });
@@ -163,11 +154,7 @@ NodeStakingVault.DelegateLockupIncreased.handler(async ({ event, context }) => {
     }
   }
 
-  const taskCompleted = getTaskCompleted(event.block.timestamp);
-  userTaskCompleted.task1Completed = taskCompleted.task1Completed;
-  userTaskCompleted.task2Completed = taskCompleted.task2Completed;
-  userTaskCompleted.task3Completed = taskCompleted.task3Completed;
-  userTaskCompleted.task4Completed = taskCompleted.task4Completed;
-
+  userTaskCompleted = getTaskCompleted(event.block.timestamp, userTaskCompleted);
+  
   context.UserTaskCompleted.set(userTaskCompleted);
 });

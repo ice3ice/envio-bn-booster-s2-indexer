@@ -5,43 +5,22 @@ const taskTimestamps = {
   task4EndTime: 1766700690,
 }
 
-const getTaskCompleted = (timestamp) => {
+const getTaskCompleted = (timestamp, userTaskCompleted) => {
   if(timestamp <= taskTimestamps.task1EndTime) {
-    return {
-      task1Completed: true,
-      task2Completed: false,
-      task3Completed: false,
-      task4Completed: false,
-    }
+    userTaskCompleted.task1Completed = true;
+    return userTaskCompleted;
   } else if(timestamp > taskTimestamps.task1EndTime && timestamp <= taskTimestamps.task2EndTime) {
-    return {
-      task1Completed: false,
-      task2Completed: true,
-      task3Completed: false,
-      task4Completed: false,
-    }
+    userTaskCompleted.task2Completed = true;
+    return userTaskCompleted;
   } else if(timestamp > taskTimestamps.task2EndTime && timestamp <= taskTimestamps.task3EndTime) {
-    return {
-      task1Completed: false,
-      task2Completed: false,
-      task3Completed: true,
-      task4Completed: false,
-    }
+    userTaskCompleted.task3Completed = true;
+    return userTaskCompleted;
   } else if(timestamp > taskTimestamps.task3EndTime && timestamp <= taskTimestamps.task4EndTime) {
-    return {
-      task1Completed: false,
-      task2Completed: false,
-      task3Completed: false,
-      task4Completed: true,
-    }
+    userTaskCompleted.task4Completed = true;
+    return userTaskCompleted;
   }
 
-  return {
-    task1Completed: false,
-    task2Completed: false,
-    task3Completed: false,
-    task4Completed: false,
-  }
+  return userTaskCompleted;
 }
 
 const test = () => {
